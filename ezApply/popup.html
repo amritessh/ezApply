@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ezApply</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header">
+    <nav>
+      <button class="tab active" data-tab="profile">Profile</button>
+      <button class="tab" data-tab="applications">Applied</button>
+      <button class="tab" data-tab="resume">Resume</button>
+      <button class="tab" data-tab="settings">Settings</button>
+    </nav>
+  </div>
+
+  <!-- Profile Tab -->
+  <div id="tab-profile" class="tab-content active">
+    <div class="section">
+      <div class="row">
+        <input id="firstName" placeholder="First name" />
+        <input id="lastName" placeholder="Last name" />
+      </div>
+      <input id="email" type="email" placeholder="Email" />
+      <input id="phone" placeholder="Phone" />
+      <div class="row">
+        <input id="city" placeholder="City" />
+        <input id="state" placeholder="State" />
+      </div>
+      <input id="linkedin" placeholder="LinkedIn URL" />
+      <input id="github" placeholder="GitHub URL" />
+      <input id="website" placeholder="Portfolio / Website" />
+      <input id="currentTitle" placeholder="Current job title" />
+      <input id="currentCompany" placeholder="Current company" />
+      <input id="yearsExperience" placeholder="Years of experience" />
+      <input id="expectedSalary" placeholder="Expected salary (optional)" />
+      <textarea id="resumeText" placeholder="Paste your resume text here — used for AI cover letters and custom answers" rows="6"></textarea>
+    </div>
+    <button id="saveProfile" class="btn-primary">Save Profile</button>
+    <div id="profileStatus" class="status"></div>
+  </div>
+
+  <!-- Applications Tab -->
+  <div id="tab-applications" class="tab-content">
+    <div id="appFilters" class="filter-row">
+      <button class="filter-btn active" data-status="">All</button>
+      <button class="filter-btn" data-status="applied">Applied</button>
+      <button class="filter-btn" data-status="phone screen">Phone Screen</button>
+      <button class="filter-btn" data-status="interview">Interview</button>
+      <button class="filter-btn" data-status="offer">Offer</button>
+      <button class="filter-btn" data-status="rejected">Rejected</button>
+    </div>
+    <div id="appList" class="app-list">
+      <p class="empty">No applications logged yet.</p>
+    </div>
+  </div>
+
+  <!-- Resume Tab -->
+  <div id="tab-resume" class="tab-content">
+    <div class="section">
+      <label class="field-label">Job Description</label>
+      <textarea id="tailorJD" placeholder="Paste the job description here…" rows="6"></textarea>
+    </div>
+    <button id="tailorBtn" class="btn-primary">✦ Tailor My Resume</button>
+    <div id="tailorStatus" class="status"></div>
+    <div id="tailorOutput" class="tailor-output" style="display:none">
+      <div class="tailor-output-header">
+        <span>Tailored bullets — paste into your resume</span>
+        <button id="tailorCopy">Copy</button>
+      </div>
+      <textarea id="tailorResult" rows="10" readonly></textarea>
+    </div>
+  </div>
+
+  <!-- Settings Tab -->
+  <div id="tab-settings" class="tab-content">
+    <div class="section">
+      <label class="field-label">AI Provider</label>
+      <select id="provider">
+        <option value="anthropic">Anthropic (Claude)</option>
+        <option value="openai">OpenAI (GPT)</option>
+        <option value="groq">Groq</option>
+        <option value="ollama">Ollama (local)</option>
+        <option value="custom">Custom (OpenAI-compatible)</option>
+      </select>
+
+      <label class="field-label" id="apiKeyLabel">API Key</label>
+      <input id="apiKey" type="password" placeholder="Paste your API key" />
+
+      <div id="baseUrlRow">
+        <label class="field-label">Base URL</label>
+        <input id="baseUrl" placeholder="http://localhost:11434/v1" />
+      </div>
+
+      <label class="field-label">Model</label>
+      <input id="model" placeholder="e.g. claude-haiku-4-5-20251001" />
+
+      <p class="hint">Credentials stored locally in your browser. Never sent anywhere except your chosen provider.</p>
+    </div>
+    <button id="saveSettings" class="btn-primary">Save Settings</button>
+    <div id="settingsStatus" class="status"></div>
+  </div>
+
+  <script src="utils/db.js"></script>
+  <script src="utils/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
